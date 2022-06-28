@@ -12,9 +12,9 @@ module.exports = {
     DysisAbstract: path.resolve('src/contentScript/DysisAbstract.ts'),
     DysisReddit: path.resolve('src/contentScript/DysisReddit.ts'),
     DysisRedditEnrichment: path.resolve('src/contentScript/DysisRedditEnrichment.ts'),
-    DysisRequests: path.resolve('src/contentScript/DysisRequests.ts'),
-    DysisTwitter: path.resolve('src/contentScript/DysisTwitter.ts'),
+    DysisRequest: path.resolve('src/contentScript/DysisRequest.ts'),
     DysisUsage: path.resolve('src/contentScript/DysisUsage.ts'),
+    DysisZeit: path.resolve('src/contentScript/DysisZeit.ts'),
   },
   module: {
     rules: [
@@ -28,7 +28,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg|css)$/,
         type: 'asset/resource'
       }
     ]

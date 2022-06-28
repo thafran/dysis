@@ -1,6 +1,6 @@
 import {DysisAbstract} from './DysisAbstract';
 
-export class DysisTwitter implements DysisAbstract {
+export class DysisZeit implements DysisAbstract {
   page: HTMLElement;
 
   constructor(page: HTMLElement) {

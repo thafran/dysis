@@ -1,5 +1,5 @@
 {
-  "name": "Dysis (TS)",
+  "name": "Dysis",
   "description": "The extension for order in general and natural justice",
   "version": "0.1.0",
   "author": "Simon Höferlin",
@@ -22,7 +22,8 @@
   "content_scripts": [
     {
       "matches":["https://*.reddit.com/*"],
-      "js": ["Dysis.js"]
+      "js": ["Dysis.js"],
+      "css": ["DysisStyle.css"]
     }
   ]
 }

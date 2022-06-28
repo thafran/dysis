@@ -68,7 +68,7 @@ export class DysisReddit implements DysisAbstract {
     function delayedObserver () {
       this.viewportObserver.observe(element)
     }
-    setTimeout(delayedObserver.bind(this), 1000)
+    setTimeout(delayedObserver.bind(this))
   }
 
   /**
@@ -77,19 +77,25 @@ export class DysisReddit implements DysisAbstract {
   initViewportObserver() {
     // Configurations (e.g. root margin and treshold can be fine tuned)
     const config = {
-      root: null,           // null means intersection root element is the viewport
-      rootMargin: '-5000px',    // margin can in- or decrease the size of the root
-      threshold: 1.0        // treshold sets the fraction overlap required for a trigger
+      // null means intersection root element is the viewport
+      root: null,
+      // margin can in- or decrease the size of the root
+      rootMargin: '0px 0px 0px 0px',
+      // treshold sets the fraction overlap required for a trigger
+      threshold: 0.2
     }
     // Instantiate the intersection observer with a viewport callback
     this.viewportObserver = new IntersectionObserver(
       // Anonymous viewport observer callback function (fires as soon element is in viewport)
       (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
         for (const entry of entries) {
-          // Create a Dysis Enrichment for the specified target which went into viewport
-          new DysisRedditEnrichment(entry.target);
-          // Unobserve target after first time the target has been in the viewport
-          observer.unobserve(entry.target);
+          // Condition checks if element is going inside viewport
+          if (entry.isIntersecting && entry.target instanceof HTMLAnchorElement) {
+            // Create a Dysis Enrichment for the specified target which went into viewport
+            new DysisRedditEnrichment(entry.target);
+            // Unobserve target after first time the target has been in the viewport
+            observer.unobserve(entry.target);
+          }
         }
       },
       config,

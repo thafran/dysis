@@ -3,20 +3,20 @@
 import {DysisUsage} from './DysisUsage';
 import {DysisAbstract} from './DysisAbstract';
 import {DysisReddit} from './DysisReddit';
-import {DysisTwitter} from './DysisTwitter';
+import {DysisZeit} from './DysisZeit';
 
 class Dysis {
   usage: DysisUsage;
   modules: DysisAbstract[];
   constructor() {
     console.log('Dysis App started ...')
-    console.log('Refresh test 2')
 
     this.usage = new DysisUsage();
 
     this.modules = [
+      // Add modules to this array
       new DysisReddit(document.body),
-      new DysisTwitter(document.body),
+      new DysisZeit(document.body),
     ]
     this.init();
   }
@@ -26,7 +26,6 @@ class Dysis {
       module.init();
     }
   }
-  
 }
-const dysis: Dysis = new Dysis();
 
+const dysis: Dysis = new Dysis();
