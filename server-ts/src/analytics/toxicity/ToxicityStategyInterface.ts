@@ -1,5 +1,5 @@
 export interface ToxicityStategyI {
-  analyze(text: string): Promise<ToxicityI|Error>;
+  analyze(text: string): Promise<ToxicityI>;
 }
 
 export interface ToxicityI {
@@ -10,4 +10,5 @@ export interface ToxicityI {
   obscene?: number,
   sexualExplicit?: number,
   threat?: number,
+  profanity?: number,
 }

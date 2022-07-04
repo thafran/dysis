@@ -11,7 +11,7 @@ export class ToxicityStrategyTensorflow implements ToxicityStategyI {
     console.log('Tensorflow Strategy')
   }
 
-  async analyze(text: string): Promise<ToxicityI|Error> {
+  async analyze(text: string): Promise<ToxicityI> {
     const prediction = await this.tensorflowToxicity(text);
     return this.tensorflowToxicityAdapter(prediction);
   }

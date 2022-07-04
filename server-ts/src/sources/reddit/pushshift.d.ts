@@ -7,6 +7,7 @@ export type PushshiftRedditSubmissionResponse = {
 }
 
 export type PushshiftRedditPost = {
+  
   "all_awardings": string[],
   "allow_live_comments": boolean,
   "author": string,
@@ -18,6 +19,7 @@ export type PushshiftRedditPost = {
   "author_is_blocked": boolean,
   "author_patreon_flair": boolean,
   "author_premium": boolean,
+  "body": string,
   "awarders": string[],
   "can_mod_post": boolean,
   "contest_mode": boolean,

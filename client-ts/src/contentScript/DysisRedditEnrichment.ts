@@ -17,7 +17,7 @@ export class DysisRedditEnrichment {
   }
 
   createElement() {
-    const dysis = document.createElement('span');
+    const dysis = document.createElement('div');
     dysis.classList.add('dysis');
     dysis.style.color = '#BF0000';
     const text = document.createElement('span');
