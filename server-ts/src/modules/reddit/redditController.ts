@@ -231,7 +231,7 @@ async function analyze(identifier: string) {
     },
   }
 
-  log.info('ANALYZE', `Analyzing information for ${identifier}`);
+  log.info('ANALYSIS', `Analyzing information for ${identifier}`);
 
   const submissionsResponse = await getSubmissionsFromRedditUserOnPushshift(
       identifier,

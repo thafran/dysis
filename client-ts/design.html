@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+
+  /** General **/
+  
+  body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .dysis-tag-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  /** Form Tag **/
+
+  .dysis-tag {
+    border-radius: 8px;
+    margin: 5px;
+  }
+
+  .dysis-text {
+    background-color: black;
+    color: white;
+    padding: 2px 12px;
+    border-radius: 8px 8px 8px 8px;
+  }
+
+  .dysis-tag-left {
+    padding: 2px 12px;
+    border-radius: 8px 0px 0px 8px;
+  }
+
+  .dysis-tag-right {
+    padding: 2px 8px;
+    border-radius: 0px 8px 8px 0px;
+  }
+
+  /** Behavior Tags **/
+
+  .dysis-tag-behavior.dysis-tag-left {
+    background-color: rgb(40, 40, 40);
+    color: white
+  }
+
+  .dysis-tag-behavior-red {
+    background-color: red;
+    color: white;
+  } 
+
+  .dysis-tag-behavior-green {
+    background-color: green;
+    color: white;
+  } 
+
+  .dysis-tag-behavior-yellow {
+    background-color: rgb(180, 180, 4);
+    color: white;
+  } 
+
+  /** Interests Tags **/
+
+  .dysis-tag-interests.dysis-tag-left {
+    background-color: lightblue;
+    color: black;
+  }
+
+  .dysis-tag-interests.dysis-tag-right {
+    background-color: darkblue;
+    color: white;
+  }
+
+  /** Metrics Tag **/
+
+  .dysis-tag-metrics.dysis-tag-left {
+    background-color: rgb(209 185 251);
+    color: black;
+  }
+
+  .dysis-tag-metrics.dysis-tag-right {
+    background-color: rgb(106 43 216);
+    color: white;
+  }
+
+  /** Misc **/
+
+
+</style>
+<body>
+  <div class="dysis-tag-container">
+    <span class="dysis-tag"><span class="dysis-text">dysis</span></span>
+
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-behavior">toxicity</span><span class="dysis-tag-right dysis-tag-behavior-red">72%</span></span>
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-behavior">threat</span><span class="dysis-tag-right dysis-tag-behavior-green">32%</span></span>
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-behavior">insult</span><span class="dysis-tag-right dysis-tag-behavior-yellow">28%</span></span>
+
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-interests">politic</span><span class="dysis-tag-right dysis-tag-interests">23 x</span></span>
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-interests">de</span><span class="dysis-tag-right dysis-tag-interests">45 x</span></span>
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-interests">cuteAnimals</span><span class="dysis-tag-right dysis-tag-interests">45 x</span></span>
+
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-metrics">total posts</span><span class="dysis-tag-right dysis-tag-metrics">82 x</span></span>
+    <span class="dysis-tag"><span class="dysis-tag-left dysis-tag-metrics">total comments</span><span class="dysis-tag-right dysis-tag-metrics">41</span></span>
+  </div>
+</body>
+</html>
