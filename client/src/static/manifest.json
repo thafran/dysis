@@ -1,0 +1,29 @@
+{
+  "name": "Dysis",
+  "description": "The extension for order in general and natural justice",
+  "version": "0.1.0",
+  "author": "Simon Höferlin",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Dysis",
+    "default_icon": "icon.png"
+  },
+  "permissions": ["storage", "alarms", "notifications", "tabs", "idle"],
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches":["https://*.reddit.com/*"],
+      "js": ["contentScript.js"],
+      "css": ["contentScript.css"]
+    }
+  ]
+}
