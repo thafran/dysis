@@ -5,7 +5,7 @@ import {DysisPopup} from './DysisPopup';
 
 const App: React.FC<{}> = () => {
   return (
-    <div style={{width: '600px', height: '300px', padding: '10px 0px'}}>
+    <div style={{width: '400px', height: '300px', padding: '10px 0px'}}>
       <DysisPopup></DysisPopup>
     </div>
   )

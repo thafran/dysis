@@ -11,7 +11,6 @@ export const DysisTag = (props: {
   const LOWER_RANGE_OF_RED: number = 80;
 
   const styleDysisTag = {
-    'borderRadius': '6px',
     'margin': '3px',
   }
 

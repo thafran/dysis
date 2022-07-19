@@ -29,6 +29,10 @@ export default class DysisBackground {
         dysisInstallationDate: Date.now(),
       });
     })
+    chrome.runtime.onInstalled.addListener(function (object) {
+    chrome.tabs.create({url: `chrome-extension://${chrome.runtime.id}/options.html`}, function (tab) {
+      });
+    });
   }
 
   protected setDefaultValues() {
