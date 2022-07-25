@@ -4,12 +4,12 @@ import {dysisConfig} from '../DysisConfig';
 
 export default class DysisBackground {
 
-  protected dysisParticipantFirstName: string;
-  protected dysisParticipantLastName: string;
-  protected dysisParticipantID: string;
-  protected dysisParticipantAgreedToTerms: boolean = false;
-  protected dysisParticipantSubmitted: boolean = false;
-  protected dysisInstallationDate: number;
+  private dysisParticipantFirstName: string;
+  private dysisParticipantLastName: string;
+  private dysisParticipantID: string;
+  private dysisParticipantAgreedToTerms: boolean = false;
+  private dysisParticipantSubmitted: boolean = false;
+  private dysisInstallationDate: string;
 
   constructor() {
     console.log('Dysis background script initiated ...')
@@ -22,20 +22,33 @@ export default class DysisBackground {
     }
   }
 
-  protected onInstalled() {
+  private onInstalled() {
+    // On installation event listener listening for installation event
     chrome.runtime.onInstalled.addListener(() => {
       console.log('Dysis extension successfully installed ...')
-      chrome.storage.local.set({
-        dysisInstallationDate: Date.now(),
-      });
+      // Get local storage values to check if participant already takes part in study (agreed to terms and submitted)
+      chrome.storage.local.get(
+      [
+        'dysisInstallationDate',
+        'dysisParticipantAgreedToTerms',
+        'dysisParticipantSubmitted',
+      ], (res) => {
+        // If there is no installation date set (because never installed or removed and installed instead of simple re-install) set installation date
+        if (!res.dysisInstallationDate) {
+          const date: Date = new Date();
+          chrome.storage.local.set({
+            dysisInstallationDate: date.toISOString(),
+          });
+        }
+        // If participant does not yet take part in study and (re-) installs extension, open options view
+        if (!res.dysisParticipantAgreedToTerms && !res.dysisParticipantSubmitted) {
+          chrome.tabs.create({url: `chrome-extension://${chrome.runtime.id}/options.html`}, () => {});
+        }
+      })
     })
-    chrome.runtime.onInstalled.addListener(function (object) {
-    chrome.tabs.create({url: `chrome-extension://${chrome.runtime.id}/options.html`}, function (tab) {
-      });
-    });
   }
 
-  protected setDefaultValues() {
+  private setDefaultValues() {
     chrome.storage.local.get(
       [
         'dysisParticipantFirstName',
@@ -55,7 +68,7 @@ export default class DysisBackground {
     });
   }
 
-  protected getLocalStorageValues() {
+  private getLocalStorageValues() {
     chrome.storage.local.get(
       [
         'dysisParticipantFirstName',
@@ -78,11 +91,11 @@ export default class DysisBackground {
     );
   }
 
-  protected afterGetLocalStorageValues() {
+  private afterGetLocalStorageValues() {
     this.initTrackers();
   }
 
-  protected initTrackers() {
+  private initTrackers() {
     if (this.dysisParticipantAgreedToTerms && this.dysisParticipantSubmitted) {
       new DysisBackgroundTracking(
         'reddit',
@@ -92,7 +105,7 @@ export default class DysisBackground {
     }
   }
 
-  protected localStorageCallback(changes: chrome.storage.StorageChange, namespace: chrome.storage.AreaName, self: DysisBackground) {
+  private localStorageCallback(changes: chrome.storage.StorageChange, namespace: chrome.storage.AreaName, self: DysisBackground) {
     for (let [key] of Object.entries(changes)) {
       if (namespace === 'local' && key === 'dysisParticipantSubmitted') {
         self.getLocalStorageValues();
@@ -101,13 +114,13 @@ export default class DysisBackground {
     }
   }
   
-  protected createListenerForLocalStorageChanges() {
+  private createListenerForLocalStorageChanges() {
     chrome.storage.onChanged.addListener((changes, namespace) => {
       this.localStorageCallback(changes, namespace, this)
     });
   }
 
-  protected debugDisplayMutationRecords() {
+  private debugDisplayMutationRecords() {
     chrome.storage.onChanged.addListener(function (changes, namespace) {
       for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
         console.log(

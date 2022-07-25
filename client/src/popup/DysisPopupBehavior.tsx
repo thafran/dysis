@@ -1,10 +1,14 @@
 import React from 'react';
 
 import {Typography, Avatar, Grid, Divider} from '@mui/material';
-
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
 
+import {dysisConfig} from '../DysisConfig';
+
 export const DysisPopupBehavior = (): JSX.Element => {
+
+  const LOWER_LIMIT_FOR_UNCERTAIN: number = dysisConfig.reddit.behavior.lowerLimitForUncertainInPercent;
+  const LOWER_LIMIT_FOR_LIKELY: number = dysisConfig.reddit.behavior.lowerLimitForLikelyInPercent;
 
   const styleDysisTagLegendBehaviorLabels = {
     borderRadius: '8px 8px 8px 8px',
@@ -34,6 +38,10 @@ export const DysisPopupBehavior = (): JSX.Element => {
     {
       name: 'threat',
       definition: 'Describes an intention to inflict pain, injury, or violence against an individual or group.',
+    },
+    {
+      name: 'profanity',
+      definition: 'Swear words, curse words, or other obscene or profane language.'
     }
   ]
   
@@ -59,7 +67,7 @@ export const DysisPopupBehavior = (): JSX.Element => {
         gutterBottom
         component="p"
         align="center">
-        Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        The latest posts from a user (including deleted or blocked posts) are analyzed by a machine learning algorithm named Perspective <sup>[1]</sup>.
       </Typography>
 
       <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
@@ -68,10 +76,9 @@ export const DysisPopupBehavior = (): JSX.Element => {
 
       {/* Behavior labels explained */}
 
-
       {textLegendBehaviorLabels.map(label => {
         return (
-          <Grid container direction={"row"} alignItems="center" columns={12} marginBottom={1} spacing={0}>
+          <Grid container direction={"row"} alignItems="center" columns={12} marginBottom={1} spacing={0} key={label.name}>
             <Grid item xs={4}>
               <span style={styleDysisTagLegendBehaviorLabels}>{label.name}</span>
             </Grid>
@@ -79,7 +86,7 @@ export const DysisPopupBehavior = (): JSX.Element => {
               <Typography
                 variant="body2"
                 color="#333333">
-                "{label.definition}"
+                "{label.definition}" <sup>[2]</sup>
               </Typography>
             </Grid>
           </Grid>
@@ -98,7 +105,7 @@ export const DysisPopupBehavior = (): JSX.Element => {
           margin="5px 0px"
           variant="body1"
           color="black">
-          If for instance "toxicity" is "80%" then 8 out of 10 people would argue that a recent comment from this user included parts which are toxic.
+          If for instance "toxicity" is "80%" then 8 out of 10 people would argue that a recent post from this user included parts which are toxic.
         </Typography>
       </Grid>
   
@@ -110,12 +117,12 @@ export const DysisPopupBehavior = (): JSX.Element => {
             padding: '2px 4px',
             color: 'white', 
             backgroundColor: 'green'
-          }}>0% to 59%</span>
+          }}>0% to {LOWER_LIMIT_FOR_UNCERTAIN - 1}%</span>
           <Typography
             paddingTop={"4px"}
             variant="body2"
             color="#333333">
-            Unlikely to apply
+            Unlikely applies
           </Typography>
         </Grid>
         <Grid item xs={4} textAlign="center">
@@ -125,7 +132,7 @@ export const DysisPopupBehavior = (): JSX.Element => {
             padding: '2px 4px',
             color: 'white', 
             backgroundColor: 'rgb(180, 180, 4)'
-          }}>60% to 79%</span>
+          }}>{LOWER_LIMIT_FOR_UNCERTAIN}% to {LOWER_LIMIT_FOR_LIKELY - 1}%</span>
           <Typography
             paddingTop={"4px"}
             variant="body2"
@@ -139,17 +146,17 @@ export const DysisPopupBehavior = (): JSX.Element => {
             margin: '2px',
             padding: '2px 4px',
             color: 'white', 
-            backgroundColor: 'red'
-          }}>80% to 100%</span>
+            backgroundColor: 'rgb(169, 1, 1)'
+          }}>{LOWER_LIMIT_FOR_LIKELY}% to 100%</span>
           <Typography
             paddingTop={"4px"}
             variant="body2"
             color="#333333">
-            Likely to apply
+            Likely applies
           </Typography>
         </Grid>
       </Grid>
-
+      
     </Grid>
   )
 }

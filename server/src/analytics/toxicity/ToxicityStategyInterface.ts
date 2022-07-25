@@ -1,3 +1,4 @@
+
 export interface ToxicityStategyI {
   analyze(text: string): Promise<ToxicityI>;
 }

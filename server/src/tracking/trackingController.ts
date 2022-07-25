@@ -32,7 +32,7 @@ export default class TrackingRouter {
         .isBoolean().withMessage('Value needs to be a boolean'),
     body('participantInstallationDate')
         .exists().withMessage('Value is required')
-        .isNumeric().withMessage('Value needs to be a number'),
+        .isString().withMessage('Value needs to be a string (ISO date string)'),
     // Using own helper to check for generated validation errors
     validate,
     // Actual controller method handling valid request
@@ -78,8 +78,26 @@ export default class TrackingRouter {
         } else {
           participant.dysis.totalUsageTime = req.body.totalUsageTime;
           participant.save();
-          respondWithSuccess(res, 'Updated participant')
+          respondWithSuccess(
+            res,
+            'Updated participant')
         }
+      } catch (error) {
+        console.log(error);
+        respondWithError(res);
+      }
+    }
+  ];
+
+  static all = [
+    async (req: Request, res: Response) => {
+      try {
+        const participants = await participantModel.find({});
+        respondWithSuccessAndData(
+          res,
+          participants,
+          `Retrieved participant data`,
+        )
       } catch (error) {
         console.log(error);
         respondWithError(res);

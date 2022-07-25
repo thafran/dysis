@@ -26,4 +26,4 @@ export default class Dysis {
   }
 }
 
-const dysis: Dysis = new Dysis();
+new Dysis();

@@ -3,13 +3,16 @@ import {ToxicityStrategyPerspectiveFetch} from './toxicity/ToxicityStrategyPersp
 import {ToxicityStrategyTensorflow} from './toxicity/ToxicityStrategyTensorflow.js'
 
 import log from '../helpers/log.js';
+import { ToxicityStrategyPerspectiveGoogleClient } from './toxicity/ToxicityStrategyPerspectiveGoogleClient.js';
 
 export class ToxicityContext {
 
   // private static toxicityStrategy: ToxicityStategyI = new ToxicityStrategyTensorflow();
-  private static toxicityStrategy: ToxicityStategyI = new ToxicityStrategyPerspectiveFetch();
+  // private static toxicityStrategy: ToxicityStategyI = new ToxicityStrategyPerspectiveFetch();
+  private static toxicityStrategy: ToxicityStategyI = new ToxicityStrategyPerspectiveGoogleClient();
 
   static async analyze(text: string): Promise<ToxicityI> {
+    log.info('TOXICITY', `Using strategy: ${this.toxicityStrategy.constructor.name}`)
     log.info('TOXICITY', `Analyzing the following text:\n"${text.slice(0, 560)} [...]"`)
     return this.toxicityStrategy.analyze(text)
   }
@@ -23,5 +26,4 @@ export class ToxicityContext {
     const toxicityStrategyTensorflow = new ToxicityStrategyTensorflow()
     console.log(await toxicityStrategyTensorflow.analyze(text))
   }
-
 }

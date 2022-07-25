@@ -16,7 +16,6 @@ const redditSchema = new mongoose.Schema(
       },
       metrics: {
         totalSubmissions: {type: Number},
-        totalComments: {type: Number},
         medianScoreComments: {type: Number},
         medianScoreSubmissions: {type: Number},
         averageScoreComments: {type: Number},
@@ -25,6 +24,7 @@ const redditSchema = new mongoose.Schema(
       context: {
         subredditsForSubmissions: [{subreddit: String, count: Number}],
         subredditsForComments: [{subreddit: String, count: Number}],
+        subreddits: [{subreddit: String, count: Number}],
       },
     },
     {

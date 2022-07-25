@@ -4,18 +4,18 @@ import {DysisRequest} from '../DysisRequest';
 
 export default class DysisBackgroundTracking {
 
-  protected trackingSiteName: string; 
-  protected trackingSiteUrl: string;
-  protected trackingIntervalInSeconds: number;
-  protected syncIntervalInSeconds: number;
+  private trackingSiteName: string; 
+  private trackingSiteUrl: string;
+  private trackingIntervalInSeconds: number;
+  private syncIntervalInSeconds: number;
 
-  protected backgroundAlarmVariableName: string;
-  protected backgroundTimeVariableName: string;
-  protected usageTimeVariableName: string;
+  private backgroundAlarmVariableName: string;
+  private backgroundTimeVariableName: string;
+  private usageTimeVariableName: string;
 
-  protected browserActivityState: string = 'active'
+  private browserActivityState: string = 'active'
 
-  protected participantID: string;
+  private participantID: string;
 
   constructor(
     // Constructor parameters
@@ -39,14 +39,14 @@ export default class DysisBackgroundTracking {
     this.init()
   }
 
-  protected init() {
+  private init() {
     this.setDefaultLocalStorageValues();
     this.createBrowserActivityStateDetector();
     this.createExtensionBackgroundAlarm();
     this.createExtensionBackgroundOnAlarm();
   }
 
-  protected setDefaultLocalStorageValues() {
+  private setDefaultLocalStorageValues() {
     // Setting default values in local storage (to make sure they are there and set to a default)
     chrome.storage.local.get(
       [
@@ -60,7 +60,7 @@ export default class DysisBackgroundTracking {
     });
   }
 
-  protected createBrowserActivityStateDetector() {
+  private createBrowserActivityStateDetector() {
     // Adds an event listener which will fire and set the browser activity state every time a
     // a state change is detected
     chrome.idle.onStateChanged.addListener(
@@ -71,14 +71,14 @@ export default class DysisBackgroundTracking {
     )
   }
 
-  protected createExtensionBackgroundAlarm() {
+  private createExtensionBackgroundAlarm() {
     // Create interval for background script
     chrome.alarms.create(this.backgroundAlarmVariableName, {
       periodInMinutes: this.trackingIntervalInSeconds / 60
     });
   }
 
-  protected createExtensionBackgroundOnAlarm() {
+  private createExtensionBackgroundOnAlarm() {
     // Creates an event listener listening to all alarms firing in Chrome
     chrome.alarms.onAlarm.addListener((alarm) => {
       // If the firing event listener is the one of this instance execute the subsequent code
@@ -98,7 +98,7 @@ export default class DysisBackgroundTracking {
               [this.backgroundTimeVariableName]: backgroundTime,
             });
             // Sync according according to the given sync interval based on background time
-            if (usageTime !== 0 && usageTime % this.syncIntervalInSeconds === 0) {
+            if (backgroundTime % this.syncIntervalInSeconds === 0) {
               // This code that be executed to sync the usage time
               this.syncUsageTime(usageTime);
               if (dysisConfig.debug.displaySyncing) {
@@ -129,7 +129,7 @@ export default class DysisBackgroundTracking {
     });    
   }
 
-  protected async syncUsageTime(usageTime: number) {
+  private async syncUsageTime(usageTime: number) {
     const response = await DysisRequest.post(
       'tracking/update/dysis',
       {
@@ -146,7 +146,7 @@ export default class DysisBackgroundTracking {
     }
   } 
 
-  protected async isCurrentActiveTab(): Promise<boolean> {
+  private async isCurrentActiveTab(): Promise<boolean> {
     // Retrieves the open tabs which are active and in focus
     const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
     // Returns true if the active and focused tab matches the tracking site URL

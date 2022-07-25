@@ -52,7 +52,7 @@ export const DysisPopupActivity = (): JSX.Element => {
         gutterBottom
         component="p"
         align="center">
-        Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        Different metrics are generated based on up to 100 latest posts of a user.
       </Typography>      
     </Grid>
   )

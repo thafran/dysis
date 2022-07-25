@@ -7,10 +7,13 @@ import {
   AuthenticationController,
 } from './helpers/authenticate.js';
 
+import {body} from 'express-validator';
+import validate from './helpers/validate.js';
+
 import moduleRouter from './modules/moduleRouter.js';
 import trackingRouter from './tracking/trackingRouter.js';
 
-import {PerspectiveController} from './analytics/toxicity/archive/perspective.js';
+import {PerspectiveController} from './analytics/toxicity/PerspectiveController.js';
 import {PushshiftController} from './sources/reddit/pushshift.js';
 
 const router = express();
@@ -36,7 +39,7 @@ router.get('/authenticate', AuthenticationController.authenticate);
  *  AUTHENTICATION REQUIRED
  *  Requests below  will need to be authenticated
  */
-// router.use(validateAuthentication);
+router.use(validateAuthentication);
 
 router.get('/protectedContent', (_, res) => {
   respondWithSuccess(res, 'Content which needs authentication');

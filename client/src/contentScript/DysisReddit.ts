@@ -90,7 +90,7 @@ export class DysisReddit implements DysisAbstract {
       // margin can in- or decrease the size of the root
       rootMargin: '0px 0px 0px 0px',
       // treshold sets the fraction overlap required for a trigger
-      threshold: 0.2
+      threshold: 1
     }
     // Instantiate the intersection observer with a viewport callback
     this.viewportObserver = new IntersectionObserver(
@@ -99,10 +99,21 @@ export class DysisReddit implements DysisAbstract {
         for (const entry of entries) {
           // Condition checks if element is going inside viewport
           if (entry.isIntersecting && entry.target instanceof HTMLAnchorElement) {
-            // Create a Dysis Enrichment for the specified target which went into viewport
-            new DysisRedditEnrichment(entry.target);
-            // Unobserve target after first time the target has been in the viewport
-            observer.unobserve(entry.target);
+            // To avoid firing for rapid scrolling the following timeout is used
+            // which only means relevant code is called when the element is for longer
+            // than the timeout value in ms in the view
+            setTimeout(
+              (self = this) => {
+                // Check if after the timeout time has passed the element is still visible
+                if (self.isInViewport(entry.target) && entry.target instanceof HTMLAnchorElement) {
+                  // Create a Dysis Enrichment for the specified target which went into viewport
+                  new DysisRedditEnrichment(entry.target);
+                  // Unobserve target after first time the target has been in the viewport
+                  observer.unobserve(entry.target);
+                }
+              },
+              dysisConfig.reddit.timeoutUntilAnElementIsInViewportInMilliseconds,
+            )
           }
         }
       },
@@ -116,6 +127,12 @@ export class DysisReddit implements DysisAbstract {
     }
     let username = path.replace('https://www.reddit.com/user/', '').slice(0, -1)
     return username;
+  }
+
+  private isInViewport(element: HTMLAnchorElement): boolean {
+    const bounding = element.getBoundingClientRect();
+    const result = bounding.top >= 0 && bounding.left >= 0 && bounding.right <= window.innerWidth && bounding.bottom <= window.innerHeight
+    return result;
   }
 
   /**

@@ -23,7 +23,7 @@ export const DysisOptions = (): JSX.Element => {
     id: null,
     agreedToTerms: false,
     submitted: false,
-    installationDate: '',
+    installationDate: 'string',
   });
 
   useEffect(() => {

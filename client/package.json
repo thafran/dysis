@@ -24,11 +24,10 @@
     "typescript": "^4.2.4",
     "webpack": "^5.34.0",
     "webpack-cli": "^4.6.0",
-    "webpack-merge": "^5.7.3"
-  },
-  "dependencies": {
+    "webpack-merge": "^5.7.3",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
     "upgrade": "^1.1.0"
   }
