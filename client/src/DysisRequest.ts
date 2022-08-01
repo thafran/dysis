@@ -1,17 +1,15 @@
+import {dysisConfig} from './DysisConfig';
+
 export class DysisRequest {
   
-  static DEBUG: boolean = true;
-
-  static API_URL: string = 'https://dysis-server.herokuapp.com/';
-  static API_URL_DEV: string = 'http://localhost:8080/';
-
+  static BASE_URL = dysisConfig.server.baseUrl;
+  
   static async get(
       path: string, 
   ): Promise<any> {
-    const BASE_URL = this.DEBUG ? this.API_URL_DEV : this.API_URL;
     try {
       const response = await fetch(
-        BASE_URL + path,
+        DysisRequest.BASE_URL + path,
         {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
@@ -23,7 +21,7 @@ export class DysisRequest {
         throw Error(response.toString())
       }
     } catch (error) {
-      throw Error(error)
+      throw Error(error);
     }
   }
 
@@ -31,10 +29,9 @@ export class DysisRequest {
       path: string,
       data: Object,
   ): Promise<any> {
-    const BASE_URL = this.DEBUG ? this.API_URL_DEV : this.API_URL;
     try {
       const response = await fetch(
-        BASE_URL + path,
+        DysisRequest.BASE_URL + path,
         {
           method: 'POST',
           body: JSON.stringify(data),
@@ -47,7 +44,7 @@ export class DysisRequest {
         throw Error(response.toString())
       }
     } catch (error) {
-      console.log(error)
+      throw Error(error);
     }
   }
 }

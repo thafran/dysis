@@ -1,7 +1,7 @@
 {
   "name": "Dysis",
   "description": "The extension for order in general and natural justice",
-  "version": "0.1.0",
+  "version": "0.8",
   "author": "Simon Höferlin",
   "manifest_version": 3,
   "icons": {

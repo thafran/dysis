@@ -1,9 +1,13 @@
+import { Response } from 'express';
 import log from '../helpers/log.js';
-import {Response} from 'express';
+
+/**
+ * Below you may find multiple frequently used responses
+ */
 
 export function respondWithSuccess(
-    res: Response,
-    msg: string = 'Request successfull',
+  res: Response,
+  msg: string = 'Request successfull',
 ): Response {
   log.info('RESPONSE', 'Request successfull with data response');
   const response = {
@@ -11,18 +15,18 @@ export function respondWithSuccess(
     message: msg,
   };
   return res.status(200).json(response);
-};
+}
 
 export function respondWithSuccessAndData(
-    res: Response,
-    data: Object,
-    msg: string = 'Request successfull with data response',
+  res: Response,
+  data: Object,
+  msg: string = 'Request successfull with data response',
 ): Response {
   log.info('RESPONSE', 'Request successfull with data response');
   const response = {
     success: true,
     message: msg,
-    data: data,
+    data,
   };
   return res.status(200).json(response);
 }
@@ -34,12 +38,12 @@ export function respondWithErrorNotFound(res: Response, msg: string = 'Resource 
     message: msg,
   };
   return res.status(404).json(response);
-};
+}
 
 export function respondWithValidationError(
-    res: Response,
-    validationErrors: any,
-    msg: string = 'Request not valid',
+  res: Response,
+  validationErrors: any,
+  msg: string = 'Request not valid',
 ): Response {
   log.warn('RESPONSE', 'Validation error');
   const response = {
@@ -48,7 +52,7 @@ export function respondWithValidationError(
     validationErrors,
   };
   return res.status(400).json(response);
-};
+}
 
 export function respondWithError(res: Response, msg: string = 'Internal server error'): Response {
   log.error('RESPONSE', 'Internal server error');
@@ -57,7 +61,7 @@ export function respondWithError(res: Response, msg: string = 'Internal server e
     message: msg,
   };
   return res.status(500).json(response);
-};
+}
 
 export function respondWithErrorUnauthorized(res: Response, msg: string = 'Unauthorized'): Response {
   log.warn('RESPONSE', 'Unauthorized');
@@ -66,22 +70,22 @@ export function respondWithErrorUnauthorized(res: Response, msg: string = 'Unaut
     message: msg,
   };
   return res.status(401).json(response);
-};
+}
 
 export function respondWithTooManyRequests(res: Response, msg: string = 'Too many requests'): Response {
   log.warn('RESPONSE', 'Too many requests');
   const response = {
     success: false,
     message: msg,
-  }
+  };
   return res.status(429).json(response);
 }
 
 export function respondWithNoContent(res: Response, msg: string = 'No content'): Response {
-  log.warn('RESPONSE', 'No conent');
+  log.warn('RESPONSE', 'No content');
   const response = {
     success: false,
     message: msg,
-  }
+  };
   return res.status(204).json(response);
 }

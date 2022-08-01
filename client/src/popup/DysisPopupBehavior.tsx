@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Typography, Avatar, Grid, Divider} from '@mui/material';
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 import {dysisConfig} from '../DysisConfig';
 
@@ -156,7 +157,28 @@ export const DysisPopupBehavior = (): JSX.Element => {
           </Typography>
         </Grid>
       </Grid>
+
+      <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
+        <Divider variant="middle" />
+      </Grid>
+
+      {/* Behavior examples explained */}
+
+      <Grid item xs={12} textAlign="center">
       
+        <ManageSearchIcon 
+          fontSize='large'
+          style={{color: 'grey'}}
+          sx={{fontSize: 40}}>
+        </ManageSearchIcon>
+        <Typography
+          align="center"
+          margin="5px 0px"
+          variant="body1"
+          color="black">
+          Click on the behavior label to see the comment with the highest score in this dimension. You can click again to hide it. Loading of this detailed analysis might take a moment.
+        </Typography>
+      </Grid>
     </Grid>
   )
 }

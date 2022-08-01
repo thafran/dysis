@@ -8,10 +8,10 @@ import {
   Checkbox,
   FormControlLabel,
   Container,
-  Grid
+  Grid,
+  Box,
+  Modal
 } from '@mui/material'
-
-import './DysisOptions.css'
 
 import {DysisRequest} from '../DysisRequest';
 
@@ -79,7 +79,12 @@ export const DysisOptions = (): JSX.Element => {
         dysisParticipantSubmitted: true,
       });
     }
+    handleOpen();
   }
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   
   const toggleButton = () => {
     setParticipant({ ...participant, agreedToTerms: (participant.agreedToTerms ? false : true)})
@@ -150,6 +155,34 @@ export const DysisOptions = (): JSX.Element => {
         </Typography>
       </FormGroup>
       </Container>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="DYSIS STUDY"
+        aria-describedby="Successfully enrolled"
+      >
+        <Box sx={{
+          position: 'absolute' as 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 400,
+          bgcolor: 'background.paper',
+          border: '1px solid grey',
+          borderRadius: '5px',
+          boxShadow: 24,
+          p: 4,
+          textAlign: 'center',
+        }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            DYSIS STUDY
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Successfully enrolled in study
+          </Typography>
+        </Box>
+      </Modal>
     </React.Fragment>
   )
 }

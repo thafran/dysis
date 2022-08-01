@@ -23,10 +23,15 @@ if (ACTIVATE_TIMESTAMP) {
   };
 }
 log.addLevel(
-    'debug',
-    10,
-    {bg: 'yellow', fg: 'white', bold: true, bell: true},
-    ' DEBUG ',
+  'debug',
+  10,
+  {
+    bg: 'yellow',
+    fg: 'white',
+    bold: true,
+    bell: true,
+  },
+  ' DEBUG ',
 );
 log.level = 'debug';
 

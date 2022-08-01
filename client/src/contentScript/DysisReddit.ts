@@ -3,6 +3,11 @@ import {DysisRedditEnrichment} from './DysisRedditEnrichment';
 
 import {dysisConfig} from '../DysisConfig';
 
+/**
+ * DysisReddit is the first module and enhances the public discussion platform reddit. Once the 
+ * script below is injected, it scans the page for user elements which need to be appended
+ * by Dysis. Once an element is detected, a DysisRedditEnrichment instance is created for it.
+ */
 export class DysisReddit implements DysisAbstract {
   page: HTMLElement;
   mutationObserver: MutationObserver;

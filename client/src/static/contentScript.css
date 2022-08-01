@@ -1,6 +1,6 @@
 /** Loading Animation **/
 
-.loader {
+.dysis-loader {
   
   border: 2px solid #f3f3f3; /* Light Gray */
   border-top: 2px solid #BF0000; /* Red */
@@ -15,15 +15,15 @@
   100% { transform: rotate(360deg); }
 }
 
-.loaderContainer {
+.dysis-loaderContainer {
   display: 'inline-block'
 }
 
 /** Container **/
 
 .dysis-hosting-element {
-  flex-wrap: wrap;
-  display: inline-flex !important
+  flex-wrap: wrap !important;
+  /* display: inline-flex !important; */ /* Sometimes messes up comment boxes */
 }
 
 .dysis-tag-container {
@@ -63,23 +63,32 @@
 
 .dysis-tag-behavior.dysis-tag-left {
   background-color: rgb(99, 99, 99);
-  color: white
+  color: white;
+  cursor: help;
 }
 
 .dysis-tag-behavior-red {
   background-color: rgb(169, 1, 1);
   color: white;
+  cursor: help;
 } 
 
 .dysis-tag-behavior-green {
   background-color: green;
   color: white;
+  cursor: help;
 } 
 
 .dysis-tag-behavior-yellow {
   background-color: rgb(180, 180, 4);
   color: white;
+  cursor: help;
 } 
+
+.dysis-tag-behavior-example {
+  font-size: 9px;
+  color: rgb(47, 47, 47)
+}
 
 /** Interests Tags **/
 
@@ -97,12 +106,23 @@
 
 .dysis-tag-metrics.dysis-tag-left {
   background-color: rgb(209 185 251);
-  color: black;
+  color: rgb(48, 48, 48);
 }
 
 .dysis-tag-metrics.dysis-tag-right {
   background-color: rgb(106 43 216);
   color: white;
+}
+
+/** Button **/
+.dysis-button {
+  font-size: 9px;
+  margin: 0px 4px;
+}
+
+.dysis-button:hover {
+  color: black;
+  text-decoration: underline 1px darkgray;
 }
 
 /** Misc **/
