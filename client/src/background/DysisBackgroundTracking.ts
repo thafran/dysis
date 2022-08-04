@@ -8,10 +8,11 @@ export default class DysisBackgroundTracking {
   private trackingSiteUrl: string;
   private trackingIntervalInSeconds: number;
   private syncIntervalInSeconds: number;
-
+  
   private backgroundAlarmVariableName: string;
   private backgroundTimeVariableName: string;
   private usageTimeVariableName: string;
+  private lastTimeAlarmRangVariableName: string;
 
   private browserActivityState: string = 'active'
   private participantID: string;
@@ -33,7 +34,8 @@ export default class DysisBackgroundTracking {
     // Set derived variables
     this.backgroundAlarmVariableName = `${this.trackingSiteName}Tracking`;
     this.backgroundTimeVariableName = `${this.trackingSiteName}BackgroundTimer`;
-    this.usageTimeVariableName = `${this.trackingSiteName}UsageTimeTotal`
+    this.usageTimeVariableName = `${this.trackingSiteName}UsageTimeTotal`;
+    this.lastTimeAlarmRangVariableName = `${this.trackingSiteName}LastTimeAlarmRang`;
     // Initialize
     this.init()
   }
@@ -51,12 +53,15 @@ export default class DysisBackgroundTracking {
       [
         this.backgroundTimeVariableName,
         this.usageTimeVariableName,
+        this.lastTimeAlarmRangVariableName,
       ], (res) => {
       chrome.storage.local.set({
         [this.backgroundTimeVariableName]: 
           this.backgroundTimeVariableName in res ? res[this.backgroundTimeVariableName]: 0,
         [this.usageTimeVariableName]: 
           this.usageTimeVariableName in res ? res[this.usageTimeVariableName] : 0,
+        [this.lastTimeAlarmRangVariableName]:
+          this.lastTimeAlarmRangVariableName in res ? res[this.lastTimeAlarmRangVariableName] : Date.now(),
       });
     });
   }
@@ -74,6 +79,11 @@ export default class DysisBackgroundTracking {
 
   private createExtensionBackgroundAlarm() {
     // Create interval for background script
+    //
+    // Caution: Be aware that Chrome does not reliably tolerate alarms firing more frequently
+    // then once a minute (so the minimum is 60 seconds for tracking), one exception is
+    // in unpacked chrome extension Chrome allows more frequent alarms (see the following link:
+    // https://developer.chrome.com/docs/extensions/reference/alarms/#method-create)
     chrome.alarms.create(this.backgroundAlarmVariableName, {
       periodInMinutes: this.trackingIntervalInSeconds / 60
     });
@@ -89,17 +99,22 @@ export default class DysisBackgroundTracking {
           [
             this.usageTimeVariableName,
             this.backgroundTimeVariableName,
+            this.lastTimeAlarmRangVariableName,
           ], (res) => {
             // Create local variables from the retrieved local storage
             let usageTime: number = res[this.usageTimeVariableName];
             let backgroundTime: number = res[this.backgroundTimeVariableName];
+            let lastTimeAlarmRang: number = res[this.lastTimeAlarmRangVariableName];
+            // Calculate time passed because Google Alarm interval is per definition not reliable
+            let timePassedSinceLastAlarmInSeconds = ((Date.now() - lastTimeAlarmRang) / 1000);
             // Increase background time and set it
-            backgroundTime += this.trackingIntervalInSeconds;
+            backgroundTime += timePassedSinceLastAlarmInSeconds
             chrome.storage.local.set({
               [this.backgroundTimeVariableName]: backgroundTime,
+              [this.lastTimeAlarmRangVariableName]: Date.now(),
             });
             // Sync according according to the given sync interval based on background time
-            if (backgroundTime % this.syncIntervalInSeconds === 0) {
+            if (Math.floor(backgroundTime) % this.syncIntervalInSeconds === 0) {
               // This code that be executed to sync the usage time
               this.syncUsageTime(usageTime);
               if (dysisConfig.debug.displaySyncing) {
@@ -113,7 +128,7 @@ export default class DysisBackgroundTracking {
               // 2) The browser state is as active (can also be idle or locked)
               if (isCurrentActiveTab && this.browserActivityState === 'active') {
                 // Increase the usage times by one 'tick'
-                usageTime = usageTime + this.trackingIntervalInSeconds;
+                usageTime += timePassedSinceLastAlarmInSeconds;
                 // Log a tick to the console if set in globalConfig
                 if (dysisConfig.debug.displayUsageTimeTicks) {
                   console.log(`Tick for ${this.trackingSiteName} (Total usage time: ${usageTime}s)`)
@@ -135,7 +150,7 @@ export default class DysisBackgroundTracking {
       'tracking/update/dysis',
       {
         'participantID': this.participantID,
-        'totalUsageTime': usageTime,
+        'totalUsageTime': Math.floor(usageTime),
       }
     )
     if (response) {
@@ -143,7 +158,7 @@ export default class DysisBackgroundTracking {
         console.log(response);
       }
     } else {
-      console.log('Sync error')
+      console.log('Dysis sync error ...')
     }
   } 
 

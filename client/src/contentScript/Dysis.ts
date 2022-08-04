@@ -28,5 +28,3 @@ export default class Dysis {
     }
   }
 }
-
-new Dysis();

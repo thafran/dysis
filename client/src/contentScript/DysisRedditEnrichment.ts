@@ -60,7 +60,6 @@ export class DysisRedditEnrichment {
     this.identifier = DysisReddit.getUsernameParamFromPath(hostingElement.href);
     this.hostingElement = hostingElement;
     if (hostingElement.parentElement.id?.includes('UserInfoTooltip')) {
-      console.log(`Tooltip for ${this.identifier}`)
       this.injetionElement = hostingElement.parentElement.parentElement;
     } else {
       this.injetionElement = hostingElement;

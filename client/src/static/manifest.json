@@ -1,8 +1,8 @@
 {
   "name": "Dysis",
-  "description": "The extension for order in general and natural justice",
-  "version": "0.8",
-  "author": "Simon Höferlin",
+  "description": "The extension for order in general and natural justice in online communities.",
+  "version": "0.8.1",
+  "author": "Simon Höferlin (https://github.com/shoeferlin)",
   "manifest_version": 3,
   "icons": {
     "16": "icon.png",

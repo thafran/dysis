@@ -23,7 +23,7 @@
 
 .dysis-hosting-element {
   flex-wrap: wrap !important;
-  /* display: inline-flex !important; */ /* Sometimes messes up comment boxes */
+  /* display: inline-flex !important; Sometimes messes up comment boxes */
 }
 
 .dysis-tag-container {
