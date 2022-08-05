@@ -16,11 +16,11 @@ export const dysisConfig = {
   debug: {
     displayMutationRecords: false,
     displayLocalStorageChanges: false,
-    displayUsageTimeTicks: false,
+    displayUsageTimeTicks: true,
     displayEnrichmentDataObjects: false,
     displayEnrichmentInstancesCreated: false,
     displaySyncingInformation: false,
-    displaySyncing: false,
+    displaySyncing: true,
     displayRequestTimeoutsAndRetries: false,
     displayEnrichmentElementCreated: false,
   },

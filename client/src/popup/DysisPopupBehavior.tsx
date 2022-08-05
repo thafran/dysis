@@ -22,7 +22,7 @@ export const DysisPopupBehavior = (): JSX.Element => {
   const textLegendBehaviorLabels = [
     {
       name: 'toxicity',
-      definition: 'A rude, disrespectful, or unreasonable comment that is likely to make people leave a discussion.',
+      definition: 'Rude, disrespectful, or unreasonable comment[s] that [are] likely to make people leave a discussion.',
     },
     {
       name: 'severe toxicity',
