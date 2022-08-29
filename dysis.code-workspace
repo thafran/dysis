@@ -4,17 +4,4 @@
       "path": "."
     }
   ],
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "chrome",
-        "request": "launch",
-        "name": "Chrome Extension debugging",
-        "port": 9222,
-        "url": "https://www.reddit.com/r/politics",
-        "webRoot": "${workspaceFolder}/client"
-      },
-    ]
-  }
 }

@@ -1,4 +1,4 @@
-import {DysisAbstract} from './DysisAbstract';
+import { DysisAbstract } from './DysisAbstract';
 
 /**
  * This is a potential future module to display the modularity of Dysis.

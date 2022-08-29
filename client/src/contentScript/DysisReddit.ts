@@ -1,7 +1,7 @@
-import {DysisAbstract} from './DysisAbstract';
-import {DysisRedditEnrichment} from './DysisRedditEnrichment';
+import { DysisAbstract } from './DysisAbstract';
+import { DysisRedditEnrichment } from './DysisRedditEnrichment';
 
-import {dysisConfig} from '../DysisConfig';
+import { dysisConfig } from '../DysisConfig';
 
 /**
  * DysisReddit is the first module and enhances the public discussion platform reddit. Once the 
@@ -37,7 +37,6 @@ export class DysisReddit implements DysisAbstract {
       // Anonymous mutation callback function
       (mutationList: any) => {
         for (const mutation of mutationList) {
-          if (dysisConfig.debug.displayMutationRecords) this.debugDisplayMutation(mutation);
           if (
             mutation.type === 'childList'       // Mutation is adding / removing elements
             && mutation.addedNodes.length > 0   // Mutation contains added nodes

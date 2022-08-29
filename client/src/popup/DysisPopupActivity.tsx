@@ -1,8 +1,8 @@
 import React from 'react';
-
-import {Typography, Avatar, Grid} from '@mui/material';
-
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
+import { Typography, Avatar, Grid } from '@mui/material';
+
+import { dysisConfig } from '../DysisConfig';
 
 export const DysisPopupActivity = (): JSX.Element => {
 
@@ -52,7 +52,7 @@ export const DysisPopupActivity = (): JSX.Element => {
         gutterBottom
         component="p"
         align="center">
-        Different metrics are generated based on up to 100 latest posts of a user.
+        { `Different metrics are generated based on up to ${ dysisConfig.reddit.activity.maxFetchedPosts } latest posts of a user.` }
       </Typography>      
     </Grid>
   )

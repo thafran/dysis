@@ -1,6 +1,6 @@
-import {DysisReddit} from './DysisReddit';
-import {DysisRequest} from '../DysisRequest';
-import {dysisConfig} from '../DysisConfig';
+import { DysisReddit } from './DysisReddit';
+import { DysisRequest } from '../DysisRequest';
+import { dysisConfig } from '../DysisConfig';
 
 /**
  * DysisRedditEnrichment instances are created for each relevant (i.e. visible) user object 
@@ -64,9 +64,6 @@ export class DysisRedditEnrichment {
     } else {
       this.injetionElement = hostingElement;
     };
-    if (dysisConfig.debug.displayEnrichmentInstancesCreated) {
-      console.log(`Dysis User Enrichment created for "${this.identifier}"...`)
-    }
     this.createContainerElement();
     this.displayLoading();
     this.displayData();
@@ -105,10 +102,6 @@ export class DysisRedditEnrichment {
     this.numberOfRequestAttempts++;
     await this.requestData().then((response) => {
       const tagContainer = this.dysisTagContainer
-      if (dysisConfig.debug.displayEnrichmentDataObjects) {
-        console.log(response)
-      }
-
       tagContainer.innerHTML = '';
 
       // Create behavioral tags
@@ -197,7 +190,10 @@ export class DysisRedditEnrichment {
           'beforeend',
           this.createMetricsElement(
             '# of comments',
-            response.metrics.totalComments >= 249 ? '> 250' : response.metrics.totalComments)
+            response.metrics.totalComments 
+            >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
+              ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
+              : response.metrics.totalComments)
         )
       }
       if (response?.metrics?.totalSubmissions) {
@@ -205,7 +201,10 @@ export class DysisRedditEnrichment {
           'beforeend',
           this.createMetricsElement(
             '# of submissions',
-            response.metrics.totalSubmissions >= 249 ? '> 250' : response.metrics.totalSubmissions)
+            response.metrics.totalSubmissions
+            >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
+              ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
+              : response.metrics.totalSubmissions)
         )
       }
     }).catch(() => {
@@ -216,9 +215,6 @@ export class DysisRedditEnrichment {
       setTimeout(
         (self = this) => {
           if (self.numberOfRequestAttempts <= self.MAX_NUMBER_OF_REQUEST_ATTEMPTS) {
-            if (dysisConfig.debug.displayRequestTimeoutsAndRetries) {
-              console.log(`Dysis requesting data again for ${self.identifier}`)
-            };
             self.displayData();
           }
         },
@@ -292,7 +288,7 @@ export class DysisRedditEnrichment {
           ${tagName}
         </span>
         <span class="dysis-tag-right dysis-tag-interests">
-          ${tagValue.toString()}
+          ${tagValue.toString()}x
         </span>
       </span>
     </a>`;

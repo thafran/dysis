@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Typography, Avatar, Grid, Divider} from '@mui/material';
+import { Typography, Avatar, Grid, Divider } from '@mui/material';
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
-import {dysisConfig} from '../DysisConfig';
+import { dysisConfig } from '../DysisConfig';
 
 export const DysisPopupBehavior = (): JSX.Element => {
 
@@ -26,11 +26,11 @@ export const DysisPopupBehavior = (): JSX.Element => {
     },
     {
       name: 'severe toxicity',
-      definition: 'A very hateful, aggressive, disrespectful comment or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words.',
+      definition: 'Very hateful, aggressive, disrespectful comment[s] or otherwise very likely to make a user leave a discussion or give up on sharing their perspective. This attribute is much less sensitive to more mild forms of toxicity, such as comments that include positive uses of curse words.',
     },
     {
       name: 'insult',
-      definition: 'Insulting, inflammatory, or negative comment towards a person or a group of people.',
+      definition: 'Insulting, inflammatory, or negative comment[s] towards a person or a group of people.',
     },
     {
       name: 'identity attack',

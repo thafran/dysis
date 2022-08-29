@@ -1,28 +1,20 @@
+const DEBUG = false;
+
 export const dysisConfig = {
   server: {
-    baseUrl: 'https://dysis-server.herokuapp.com/'
-    // baseUrl: 'http://localhost:8080/'
+    baseUrl: DEBUG ? 'http://localhost:8080/' : 'https://dysis-server.herokuapp.com/'
+  },
+  tracking: {
+    defaultMaxIdleTimeInSeconds: 40,
+    defaultTrackingIntervalInSeconds: 1, 
+  },
+  sync: {
+    defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 5,
   },
   requests: {
     lowerBoundForFailedRequestTimeoutInSeconds: 5,
     upperBoundForFailedRequestTimeoutInSeconds: 10,
     maxNumberOfRequestAttempts: 3,
-  },
-  sync: {
-    showNotificationWhenSyncing: false,
-    defaultTrackingIntervalInSeconds: 1, // Consider Chrome limitations with less then 60 as value
-    defaultSyncIntervalInSeconds: 60,
-  },
-  debug: {
-    displayMutationRecords: false,
-    displayLocalStorageChanges: false,
-    displayUsageTimeTicks: true,
-    displayEnrichmentDataObjects: false,
-    displayEnrichmentInstancesCreated: false,
-    displaySyncingInformation: false,
-    displaySyncing: true,
-    displayRequestTimeoutsAndRetries: false,
-    displayEnrichmentElementCreated: false,
   },
   reddit: {
     timeoutUntilAnElementIsInViewportInMilliseconds: 125,
@@ -32,6 +24,9 @@ export const dysisConfig = {
     },
     interests: {
       maxNumberOfDisplayedInterests: 10,
+    },
+    activity: {
+      maxFetchedPosts: 250,
     }
   },
 }

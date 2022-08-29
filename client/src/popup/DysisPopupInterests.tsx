@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Typography, Avatar, Grid} from '@mui/material';
+import { Typography, Avatar, Grid } from '@mui/material';
 import InterestsOutlinedIcon from '@mui/icons-material/InterestsOutlined';
 
-import {dysisConfig} from '../DysisConfig';
+import { dysisConfig } from '../DysisConfig';
 
 export const DysisPopupInterests = (): JSX.Element => {
 

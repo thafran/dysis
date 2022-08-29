@@ -1,10 +1,10 @@
-# Server
+# Dysis Server
+### The extension for order in general and natural justice in online communities.
 
-## Setup
-* Set mongoDB URI in local .env file and on server
-* Run `npm install` to install dependencies
-* Run `npm run dev` to run in development mode
+This is the respository of the Dysis App and consists of a `client` which contains the source code for the frontend implemented as a Google Chrome Extensions as well as a `server` containing the expressJS backend which provides the necessary data to the client.
 
-## Deployment
-Server is setup to run on Heroku with a Procfile executing `npm start`
-As database mongoDB Atlas with mongoose is prepared.
+## Setup and Deployment
+
+Please see the individual `README.md` files in the folder `client` and `server` for a explanation on setup and deployment.
+
+Copyright (c) 2022 Simon Höferlin

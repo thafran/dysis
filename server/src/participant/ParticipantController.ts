@@ -8,6 +8,7 @@ import {
   respondWithSuccess,
   respondWithSuccessAndData,
 } from '../helpers/response.js';
+import log from '../helpers/log.js';
 
 /**
  * Controller for participants which take part in the study and agreed to the terms.
@@ -65,6 +66,7 @@ export default class ParticipantController {
         const data = {
           participantID: participant.id,
         };
+        log.info('PARTICIPANT', `Created participant '${participant.fullName}'`);
         respondWithSuccessAndData(
           res,
           data,
@@ -100,17 +102,20 @@ export default class ParticipantController {
     async (req: Request, res: Response) => {
       try {
         const participant = await ParticipantModel.findOne({ _id: req.body.participantID });
-        if (participant === null) {
+        if (await participant === null) {
           respondWithError(res, 'Could not find participant');
         } else {
+          const usageTimeBeforeUpdate: number = participant.dysis.totalUsageTime;
           participant.dysis.totalUsageTime = req.body.totalUsageTime;
           participant.save();
+          log.info('PARTICIPANT', `Increased usage time by ${req.body.totalUsageTime - usageTimeBeforeUpdate} s for '${participant.fullName}'`);
           respondWithSuccess(
             res,
             'Updated participant',
           );
         }
       } catch (error) {
+        log.error('PARTICIPANT', `Error for ${req.body.participantID}'`);
         console.log(error);
         respondWithError(res);
       }

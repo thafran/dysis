@@ -1,6 +1,7 @@
-import {DysisAbstract} from './DysisAbstract';
-import {DysisReddit} from './DysisReddit';
-import {DysisZeit} from './DysisZeit';
+import { DysisAbstract } from './DysisAbstract';
+import { DysisReddit } from './DysisReddit';
+import DysisTracking from './DysisTracking';
+import { DysisZeit } from './DysisZeit';
 
 /**
  * The Dysis class is loaded via the content script which is injected in relevant websites
@@ -23,6 +24,7 @@ export default class Dysis {
   }
 
   init() {
+    new DysisTracking();
     for (const module of this.modules) {
       module.init();
     }

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {Typography, Grid, Divider, Link, Button} from '@mui/material';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { Typography, Grid, Divider, Link } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import {DysisPopupBehavior} from './DysisPopupBehavior';
-import {DysisPopupInterests} from './DysisPopupInterests';
-import {DysisPopupActivity} from './DysisPopupActivity';
+import { DysisPopupBehavior } from './DysisPopupBehavior';
+import { DysisPopupInterests } from './DysisPopupInterests';
+import { DysisPopupActivity } from './DysisPopupActivity';
 
 const theme = createTheme({
   typography: {
@@ -64,31 +64,31 @@ export const DysisPopup = (): JSX.Element => {
           </Grid>
           {/* Notice: Links do not work in Browser Extensions, instead an event listener has to be added and then chrome.tabs.create has to be called */}
           <Grid item xs={12} margin={1} textAlign="center">
-              <Typography
-              variant="body1"
-              component="p"
-              alignContent="center">
-              Browser extension built by Simon Höferlin <Link href="#" onClick={() => createNewTab('https://github.com/shoeferlin/')}>(GitHub)</Link>
-              </Typography>
-              <Typography
-              marginTop={1}
-              variant="caption"
-              component="p"
-              alignContent="center">
-              Behavioral analytics powered by:
-              </Typography>
-              <Typography
-              variant="caption"
-              component="p"
-              alignContent="center">
-              [1] <Link href="#" onClick={() => createNewTab('https://perspectiveapi.com/')}>Perspective API</Link>
-              </Typography>
-              <Typography
-              variant="caption"
-              component="p"
-              alignContent="center">
-              [2] <Link href="#" onClick={() => createNewTab('https://developers.perspectiveapi.com/s/about-the-api-attributes-and-languages')}>Perspective API (Attributes & Languages)</Link>
-              </Typography>
+            <Typography
+            variant="body1"
+            component="p"
+            alignContent="center">
+            Browser extension built by Simon Höferlin <Link href="#" onClick={() => createNewTab('https://github.com/shoeferlin/')}>(GitHub)</Link>
+            </Typography>
+            <Typography
+            marginTop={1}
+            variant="caption"
+            component="p"
+            alignContent="center">
+            Behavioral analytics powered by:
+            </Typography>
+            <Typography
+            variant="caption"
+            component="p"
+            alignContent="center">
+            [1] <Link href="#" onClick={() => createNewTab('https://perspectiveapi.com/')}>Perspective API</Link>
+            </Typography>
+            <Typography
+            variant="caption"
+            component="p"
+            alignContent="center">
+            [2] <Link href="#" onClick={() => createNewTab('https://developers.perspectiveapi.com/s/about-the-api-attributes-and-languages')}>Perspective API (Attributes & Languages)</Link>
+            </Typography>
           </Grid>
         </Grid>
       </ThemeProvider>
