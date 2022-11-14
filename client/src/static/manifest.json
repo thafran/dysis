@@ -1,8 +1,8 @@
 {
-  "name": "Dysis",
-  "description": "The extension for order in general and natural justice in online communities.",
+  "name": "Reddit Insights",
+  "description": "This plugin gives you unique insights about behavior and preferences of other Redditors",
   "version": "1.0",
-  "author": "Simon Höferlin (https://github.com/shoeferlin)",
+  "author": "Simon Höferlin (https://github.com/shoeferlin), Franz Waltenberger",
   "manifest_version": 3,
   "icons": {
     "16": "icon.png",
@@ -14,14 +14,14 @@
     "default_title": "Dysis",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "alarms", "notifications", "tabs", "idle"],
+  "permissions": ["storage", "alarms", "tabs", "idle"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches":["https://*.reddit.com/*"],
+      "matches": ["https://*.reddit.com/*"],
       "js": ["contentScript.js"],
       "css": ["contentScript.css"]
     }

@@ -19,6 +19,7 @@ export default class DysisBackground {
     // On installation event listener listening for installation event
     chrome.runtime.onInstalled.addListener(() => {
       console.log('Dysis extension successfully installed ...')
+
       // Get local storage values to check if participant already takes part in study 
       // which means they agreed to terms and submitted in the options panel
       chrome.storage.local.get(
@@ -38,8 +39,7 @@ export default class DysisBackground {
         // open options view to remind them of signing up
         if (!res.dysisParticipantAgreedToTerms && !res.dysisParticipantSubmitted) {
           chrome.tabs.create(
-            { url: `chrome-extension://${chrome.runtime.id}/options.html` },
-            () => {}
+            { url: "https://www.reddit.com" },
           );
         }
       })

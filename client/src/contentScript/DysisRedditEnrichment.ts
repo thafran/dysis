@@ -11,7 +11,7 @@ import { dysisConfig } from '../DysisConfig';
 export class DysisRedditEnrichment {
 
   hostingElement: HTMLAnchorElement;
-  injetionElement: HTMLElement;
+  injectionElement: HTMLElement;
   dysisContainer: HTMLElement;
   dysisTagContainer: HTMLElement;
   identifier: String;
@@ -60,9 +60,9 @@ export class DysisRedditEnrichment {
     this.identifier = DysisReddit.getUsernameParamFromPath(hostingElement.href);
     this.hostingElement = hostingElement;
     if (hostingElement.parentElement.id?.includes('UserInfoTooltip')) {
-      this.injetionElement = hostingElement.parentElement.parentElement;
+      this.injectionElement = hostingElement.parentElement.parentElement;
     } else {
-      this.injetionElement = hostingElement;
+      this.injectionElement = hostingElement;
     };
     this.createContainerElement();
     this.displayLoading();
@@ -73,8 +73,8 @@ export class DysisRedditEnrichment {
     const dysisContainer = document.createElement('div');
     dysisContainer.classList.add('dysis');
 
-    this.injetionElement.parentElement.parentElement.parentElement.insertAdjacentElement('beforeend', dysisContainer);
-    this.injetionElement.parentElement.parentElement.parentElement.classList.add('dysis-hosting-element');
+    this.injectionElement.parentElement.parentElement.parentElement.insertAdjacentElement('beforeend', dysisContainer);
+    this.injectionElement.parentElement.parentElement.parentElement.classList.add('dysis-hosting-element');
     
     this.dysisContainer = dysisContainer;   
 
@@ -92,7 +92,10 @@ export class DysisRedditEnrichment {
       'beforeend',
       `<span class="dysis-tag">
         <span class="dysis-text">
-          <b>DYSIS</b> loading...  <div class="dysis-loader" style="display: inline-block"></div>
+          loading...<div class="dysis-loader" style="display: inline-block"></div>
+        </span>
+        <span class="dysis-placeholder">
+        &nbsp;<div class="dysis-loader" style="display: inline-block"></div>
         </span>
       </span>`
     )
@@ -104,61 +107,79 @@ export class DysisRedditEnrichment {
       const tagContainer = this.dysisTagContainer
       tagContainer.innerHTML = '';
 
-      // Create behavioral tags
-      if (response?.analytics?.perspective?.toxicity) {
-        tagContainer.appendChild(
-          this.createBehaviorElement(
-            'toxicity',
-            'toxicity',
-            response.analytics.perspective.toxicity
-          )
-        )
-      }
-      if (response?.analytics?.perspective?.severeToxicity) {
-        tagContainer.appendChild(
-          this.createBehaviorElement(
-            'severe toxicity',
-            'severeToxicity',
-            response.analytics.perspective.severeToxicity
-          )
-        )
-      }
-      if (response?.analytics?.perspective?.insult) {
-        tagContainer.appendChild( 
-          this.createBehaviorElement(
-            'insult',
-            'insult',
-            response.analytics.perspective.insult
-          )
-        )
-      }
-      if (response?.analytics?.perspective?.identityAttack) {
-        tagContainer.appendChild( 
-          this.createBehaviorElement(
-            'identity attack',
-            'identityAttack',
-            response.analytics.perspective.identityAttack
-          )
-        )
-      }
-      if (response?.analytics?.perspective?.threat) {
-        tagContainer.appendChild( 
-          this.createBehaviorElement(
-            'threat',
-            'threat',
-            response.analytics.perspective.threat
-          )
-        )
-      }
-      if (response?.analytics?.perspective?.profanity) {
-        tagContainer.appendChild( 
-          this.createBehaviorElement(
-            'profanity',
-            'profanity',
-            response.analytics.perspective.threat
-          )
-        )
-      }
+            // Create behavioral tags
+            if (response?.analytics?.perspective?.toxicity) {
+              if (response.analytics.perspective.toxicity>0.85) {
+                tagContainer.appendChild(
+                  this.createBehaviorElement(
+                    'toxicity',
+                    'toxicity',
+                    response.analytics.perspective.toxicity
+                  )
+                )
+              }
+            }
+      
+            if (response?.analytics?.perspective?.severeToxicity) {
+              if (response.analytics.perspective.severeToxicity>0.85) {
+                tagContainer.appendChild(
+                  this.createBehaviorElement(
+                   'severe toxicity',
+                    'severeToxicity',
+                   response.analytics.perspective.severeToxicity
+                  )
+                )
+              }
+            }
+      
+            if (response?.analytics?.perspective?.insult) {
+              if (response.analytics.perspective.insult>0.85) {
+                tagContainer.appendChild(
+                  this.createBehaviorElement(
+                   'insult',
+                    'insult',
+                   response.analytics.perspective.insult
+                  )
+                )
+              }
+            }
+      
+            if (response?.analytics?.perspective?.identityAttack) {
+              if (response.analytics.perspective.identityAttack>0.85) {
+                tagContainer.appendChild( 
+                  this.createBehaviorElement(
+                    'identity attack',
+                    'identityAttack',
+                    response.analytics.perspective.identityAttack
+                  )
+                )
+              }
+            }
+      
+            if (response?.analytics?.perspective?.threat) {
+              if (response.analytics.perspective.threat>0.85) {
+                tagContainer.appendChild( 
+                  this.createBehaviorElement(
+                    'threat',
+                    'threat',
+                    response.analytics.perspective.threat
+                  )
+                )
+              }
+            }
+            
+            if (response?.analytics?.perspective?.profanity) {
+              if (response.analytics.perspective.profanity>0.85) {
+                tagContainer.appendChild( 
+                  this.createBehaviorElement(
+                    'profanity',
+                    'profanity',
+                    response.analytics.perspective.threat
+                  )
+                )
+              }
+            }
+      
 
       // Create interests tags (max. 10)
       for (const interests of response.context.subreddits.slice(0, this.MAX_NUMBER_OF_SUBREDDITS)) {
@@ -168,45 +189,45 @@ export class DysisRedditEnrichment {
         )
       }
 
-      // Create activity tags
-      if (response?.metrics?.averageScoreSubmissions) {
-        tagContainer.insertAdjacentHTML(
-          'beforeend',
-          this.createMetricsElement(
-            '\&#8709 score for submissions', 
-            response.metrics.averageScoreSubmissions.toFixed(2).toString())
-        )
-      }
-      if (response?.metrics?.averageScoreComments) {
-        tagContainer.insertAdjacentHTML(
-          'beforeend',
-          this.createMetricsElement(
-            '\&#8709 score for comments',
-            response.metrics.averageScoreComments.toFixed(2).toString())
-        )
-      };
-      if (response?.metrics?.totalComments) {
-        tagContainer.insertAdjacentHTML(
-          'beforeend',
-          this.createMetricsElement(
-            '# of comments',
-            response.metrics.totalComments 
-            >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
-              ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
-              : response.metrics.totalComments)
-        )
-      }
-      if (response?.metrics?.totalSubmissions) {
-        tagContainer.insertAdjacentHTML(
-          'beforeend',
-          this.createMetricsElement(
-            '# of submissions',
-            response.metrics.totalSubmissions
-            >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
-              ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
-              : response.metrics.totalSubmissions)
-        )
-      }
+      //Create activity tags
+      // if (response?.metrics?.averageScoreSubmissions) {
+      //   tagContainer.insertAdjacentHTML(
+      //     'beforeend',
+      //     this.createMetricsElement(
+      //       '\&#8709 score for submissions', 
+      //       response.metrics.averageScoreSubmissions.toFixed(2).toString())
+      //   )
+      // }
+      // if (response?.metrics?.averageScoreComments) {
+      //   tagContainer.insertAdjacentHTML(
+      //     'beforeend',
+      //     this.createMetricsElement(
+      //       '\&#8709 score for comments',
+      //       response.metrics.averageScoreComments.toFixed(2).toString())
+      //   )
+      // };
+      // if (response?.metrics?.totalComments) {
+      //   tagContainer.insertAdjacentHTML(
+      //     'beforeend',
+      //     this.createMetricsElement(
+      //       '# of comments',
+      //       response.metrics.totalComments 
+      //       >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
+      //         ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
+      //         : response.metrics.totalComments)
+      //   )
+      // }
+      // if (response?.metrics?.totalSubmissions) {
+      //   tagContainer.insertAdjacentHTML(
+      //     'beforeend',
+      //     this.createMetricsElement(
+      //       '# of submissions',
+      //       response.metrics.totalSubmissions
+      //       >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
+      //         ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 
+      //         : response.metrics.totalSubmissions)
+      //   )
+      // }
     }).catch(() => {
       const timeoutInMiliseconds: number = this.getRandomNumber(
         this.LOWER_BOUND_FOR_FAILED_REQUEST_TIMEOUT_IN_SECONDS * 1000,
@@ -313,7 +334,7 @@ export class DysisRedditEnrichment {
   }
 
   private instanceIsInViewport(): boolean {
-    const bounding = this.injetionElement.getBoundingClientRect();
+    const bounding = this.injectionElement.getBoundingClientRect();
     const result = (
       bounding.top >= 0 
       && bounding.left >= 0 
