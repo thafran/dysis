@@ -38,6 +38,15 @@ export default class DysisBackgroundSync {
           ], (res) => {
             const usageTime: number = 'dysisUsageTime' in res ? res.dysisUsageTime : 0;
             this.syncUsageTime(usageTime);
+            if (usageTime > 0) {
+              chrome.storage.local.get(
+                ['reddit_user_name'], (res) => {
+
+                  const user_name: string = 'reddit_user_name' in res ? res.reddit_user_name : "";
+                  this.syncUserTimestamp(user_name);
+                }
+              )
+            }
           }
         );
         console.log('Dysis syncing ...')
@@ -56,5 +65,18 @@ export default class DysisBackgroundSync {
     if (!response) {
       console.log('Dysis sync error ...')
     }
-  } 
+  }
+
+  private async syncUserTimestamp(user_name: string) {
+    console.log('syncUserTimestamp? ');
+    const response = await DysisRequest.post(
+      'api/user/update_timestamp',
+      {
+        'identifier': user_name,
+      }
+    )
+    if (!response) {
+      console.log('Dysis sync error ...')
+    }
+  }
 }

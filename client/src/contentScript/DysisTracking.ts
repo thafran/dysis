@@ -70,6 +70,7 @@ export default class DysisTracking {
       && (Date.now() - this.timeOfLastAction) < this.MAX_IDLE_TIME_IN_SECONDS * 1000
     ) {
       this.increaseUsageTimeByOneTick();
+      this.setRedditUsername();
     }
   }
 
@@ -89,6 +90,15 @@ export default class DysisTracking {
       }
     )
   };
+
+  private setRedditUsername() {
+    // TODO: when the dropdown menu is reduced (e.g. in media content) than the name variable is wrong.
+    var name = document.getElementById('USER_DROPDOWN_ID').innerText.split("\n")[0];
+
+    chrome.storage.local.set({
+      reddit_user_name: name,
+    })
+  }
 
   private createTimeOfLastActivityListeners() {
     const setTimeOfLastActivity = () => {
