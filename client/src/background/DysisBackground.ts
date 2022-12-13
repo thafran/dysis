@@ -39,7 +39,7 @@ export default class DysisBackground {
         // open options view to remind them of signing up
         if (!res.dysisParticipantAgreedToTerms && !res.dysisParticipantSubmitted) {
           chrome.tabs.create(
-            { url: 'chrome-extension://${chrome.runtime.id}/options.html' },
+            { url: `chrome-extension://${chrome.runtime.id}/options.html` },
             () => {}
           );
         }
