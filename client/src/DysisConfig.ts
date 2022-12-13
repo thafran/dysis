@@ -1,4 +1,4 @@
-const DEBUG = false;
+const DEBUG = true;
 
 export const dysisConfig = {
   server: {
@@ -9,7 +9,7 @@ export const dysisConfig = {
     defaultTrackingIntervalInSeconds: 1, 
   },
   sync: {
-    defaultSyncIntervalInMinutes: 2 // DEBUG ? 1 / 6 : 5,
+    defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 5,
   },
   requests: {
     lowerBoundForFailedRequestTimeoutInSeconds: 5,
