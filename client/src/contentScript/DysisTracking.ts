@@ -91,9 +91,18 @@ export default class DysisTracking {
     )
   };
 
+  /**
+   * Searches the DOM for the reddit user name and writes it to local storage. 
+   * If no user is logged in, empty str is set for reddit_user_name.
+   */
   private setRedditUsername() {
-    // TODO: when the dropdown menu is reduced (e.g. in media content) than the name variable is wrong.
-    var name = document.getElementById('USER_DROPDOWN_ID').innerText.split("\n")[0];
+    // var name = document.getElementById('USER_DROPDOWN_ID').innerText.split("\n")[0];
+    var name_tag = document.getElementById('USER_DROPDOWN_ID').querySelectorAll('span')[3];
+    if (name_tag == null){
+      var name = "";
+    } else {
+      var name = name_tag.innerText;
+    }
 
     chrome.storage.local.set({
       reddit_user_name: name,
