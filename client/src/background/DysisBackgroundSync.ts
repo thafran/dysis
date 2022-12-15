@@ -36,14 +36,17 @@ export default class DysisBackgroundSync {
           [
             'dysisUsageTime'
           ], (res) => {
-            const usageTime: number = 'dysisUsageTime' in res ? res.dysisUsageTime : 0;
+            const usageTime = 'dysisUsageTime' in res ? res.dysisUsageTime : 0;
             this.syncUsageTime(usageTime);
-            if (usageTime > 0) {
+
+            if (parseInt(usageTime) > 0) {
               chrome.storage.local.get(
                 ['reddit_user_name'], (res) => {
 
                   const user_name: string = 'reddit_user_name' in res ? res.reddit_user_name : "";
-                  this.syncUserTimestamp(user_name);
+                  if (user_name) {
+                    this.syncUserTimestamp(user_name);
+                  }
                 }
               )
             }
