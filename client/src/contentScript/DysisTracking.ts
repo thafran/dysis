@@ -47,6 +47,7 @@ export default class DysisTracking {
     chrome.storage.local.get(
     [
       'dysisUsageTime',
+
     ], (res) => {
       chrome.storage.local.set({
         dysisUsageTime: 'dysisUsageTime' in res ? res.dysisUsageTime : 0,

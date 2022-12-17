@@ -4,6 +4,7 @@ import { DysisRequest } from "../DysisRequest";
 export default class DysisBackgroundSync {
 
   participantID: string;
+  globalUsageTime: number = 0;
 
   SYNC_INTERVAL_IN_MINUTES: number = dysisConfig.sync.defaultSyncIntervalInMinutes;
 
@@ -34,12 +35,14 @@ export default class DysisBackgroundSync {
       if (alarm.name == 'dysisBackgroundSync') {
         chrome.storage.local.get(
           [
-            'dysisUsageTime'
+            'dysisUsageTime',
           ], (res) => {
             const usageTime = 'dysisUsageTime' in res ? res.dysisUsageTime : 0;
+
             this.syncUsageTime(usageTime);
 
-            if (parseInt(usageTime) > 0) {
+            if (usageTime > this.globalUsageTime) {
+              this.globalUsageTime = usageTime;
               chrome.storage.local.get(
                 ['reddit_user_name'], (res) => {
 
