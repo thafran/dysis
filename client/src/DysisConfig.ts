@@ -9,15 +9,15 @@ export const dysisConfig = {
     defaultTrackingIntervalInSeconds: 1, 
   },
   sync: {
-    defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 5,
+    defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 2,
   },
   requests: {
-    lowerBoundForFailedRequestTimeoutInSeconds: 5,
-    upperBoundForFailedRequestTimeoutInSeconds: 10,
-    maxNumberOfRequestAttempts: 3,
+    lowerBoundForFailedRequestTimeoutInSeconds: 1, //5
+    upperBoundForFailedRequestTimeoutInSeconds: 3, //10
+    maxNumberOfRequestAttempts: 2, //3
   },
   reddit: {
-    timeoutUntilAnElementIsInViewportInMilliseconds: 80,
+    timeoutUntilAnElementIsInViewportInMilliseconds: 100, //80
     behavior: {
       lowerLimitForUncertainInPercent: 60,
       lowerLimitForLikelyInPercent: 80,

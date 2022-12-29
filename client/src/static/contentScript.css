@@ -43,6 +43,7 @@
   border-radius: 8px 8px 8px 8px;
   font-size: 9px;
   margin: 3px;
+  opacity: 0.5;
 }
 
 .dysis-placeholder {
@@ -51,6 +52,7 @@
   padding: 1px 300px;
   border-radius: 8px 8px 8px 8px;
   margin: 3px;
+  opacity: 0.5;
 }
 
 /** Form Tag **/
@@ -58,18 +60,21 @@
 .dysis-tag {
   margin: 3px;
   white-space: nowrap;
+  opacity: 0.8;
 }
 
 .dysis-tag-left {
   padding: 1px 4px;
   border-radius: 8px 0px 0px 8px;
   font-size: 9px;
+  opacity: 0.8;
 }
 
 .dysis-tag-right {
   padding: 1px 4px;
   border-radius: 0px 8px 8px 0px;
   font-size: 9px;
+  opacity: 0.8;
 }
 
 /** Behavior Tags **/
@@ -78,24 +83,28 @@
   background-color: rgb(99, 99, 99);
   color: white;
   cursor: help;
+  opacity: 0.8;
 }
 
 .dysis-tag-behavior-red {
   background-color: rgb(169, 1, 1);
   color: white;
   cursor: help;
+  opacity: 0.8;
 } 
 
 .dysis-tag-behavior-green {
   background-color: green;
   color: white;
   cursor: help;
+  opacity: 0.8;
 } 
 
 .dysis-tag-behavior-yellow {
   background-color: rgb(180, 180, 4);
   color: white;
   cursor: help;
+  opacity: 0.8;
 } 
 
 .dysis-tag-behavior-example {
@@ -108,11 +117,13 @@
 .dysis-tag-interests.dysis-tag-left {
   background-color: lightblue;
   color: black;
+  opacity: 0.8;
 }
 
 .dysis-tag-interests.dysis-tag-right {
   background-color: darkblue;
   color: white;
+  opacity: 0.8;
 }
 
 /** Metrics Tag **/
@@ -120,22 +131,26 @@
 .dysis-tag-metrics.dysis-tag-left {
   background-color: rgb(209 185 251);
   color: rgb(48, 48, 48);
+  opacity: 0.8;
 }
 
 .dysis-tag-metrics.dysis-tag-right {
   background-color: rgb(106 43 216);
   color: white;
+  opacity: 0.8;
 }
 
 /** Button **/
 .dysis-button {
   font-size: 9px;
   margin: 0px 4px;
+  opacity: 0.8;
 }
 
 .dysis-button:hover {
   color: black;
   text-decoration: underline 1px darkgray;
+  opacity: 0.8;
 }
 
 /** Misc **/
