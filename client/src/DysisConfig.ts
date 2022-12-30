@@ -12,12 +12,12 @@ export const dysisConfig = {
     defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 2,
   },
   requests: {
-    lowerBoundForFailedRequestTimeoutInSeconds: 1, //5
-    upperBoundForFailedRequestTimeoutInSeconds: 3, //10
-    maxNumberOfRequestAttempts: 2, //3
+    lowerBoundForFailedRequestTimeoutInSeconds: 5, 
+    upperBoundForFailedRequestTimeoutInSeconds: 10,
+    maxNumberOfRequestAttempts: 3,
   },
   reddit: {
-    timeoutUntilAnElementIsInViewportInMilliseconds: 100, //80
+    timeoutUntilAnElementIsInViewportInMilliseconds: 80,
     behavior: {
       lowerLimitForUncertainInPercent: 60,
       lowerLimitForLikelyInPercent: 80,
