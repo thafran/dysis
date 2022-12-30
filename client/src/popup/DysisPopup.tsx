@@ -33,7 +33,7 @@ export const DysisPopup = (): JSX.Element => {
               style={{fontWeight: 600}}
               variant="h4" 
               component="h4">
-              Dysis
+              Reddit Insights
             </Typography>
             <Typography 
               variant="h6" 
@@ -68,7 +68,7 @@ export const DysisPopup = (): JSX.Element => {
             variant="body1"
             component="p"
             alignContent="center">
-            Browser extension built by Simon Höferlin <Link href="#" onClick={() => createNewTab('https://github.com/shoeferlin/')}>(GitHub)</Link>
+            Browser extension built by Simon Höferlin <Link href="#" onClick={() => createNewTab('https://github.com/shoeferlin/')}>(GitHub)</Link> & Franz Xaver Waltenberger <Link href="#" onClick={() => createNewTab('https://www.cdtm.de/cdtm_team/franz-x-waltenberger/')}>(Bio)</Link>
             </Typography>
             <Typography
             marginTop={1}

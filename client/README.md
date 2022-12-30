@@ -1,7 +1,6 @@
-# Dysis Client
-### The extension for order in general and natural justice in online communities.
+# Reddit Insights Client
 
-This is the frontend of the Dysis App and has been implemented as a Google Chrome Extension with Manifest Version 3.
+This is the frontend of the Reddit Insights App and has been implemented as a Google Chrome Extension with Manifest Version 3.
 
 ## Purpose
 
@@ -41,4 +40,4 @@ Multiple configurations can be set in the file `DysisConfig.js` such as (excerpt
 - Numerous settings on how often and after how many seconds to retry after a request failed
 - Numerous frontend variables such as the `maxNumberOfDisplayedInterests` which defines how many interest tags 
 
-Copyright (c) 2022 Simon Höferlin
+Copyright (c) 2022 Simon Höferlin, Franz Xaver Waltenberger

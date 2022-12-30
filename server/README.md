@@ -1,7 +1,6 @@
-# Dysis Server
-### The extension for order in general and natural justice in online communities.
+# Reddit Insights Server
 
-This is the backend of the Dysis App and has been implemented with a expressJS server and a connected mongoDB database.
+This is the backend of the Reddit Insights App and has been implemented with a expressJS server and a connected mongoDB database.
 
 ## Purpose
 
@@ -28,4 +27,4 @@ Server is setup to run on Heroku with a Procfile executing `npm start`
 
 Set the environment variables on the server (see `example.env` for a list of required variables).
 
-Copyright (c) 2022 Simon Höferlin
+Copyright (c) 2022 Simon Höferlin, Franz Xaver Waltenberger
