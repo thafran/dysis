@@ -1,7 +1,7 @@
 {
   "name": "Reddit Insights",
   "description": "This plugin gives you unique insights about behavior and preferences of other Redditors",
-  "version": "1.0",
+  "version": "1.1",
   "author": "Simon Höferlin (https://github.com/shoeferlin), Franz Waltenberger",
   "manifest_version": 3,
   "icons": {

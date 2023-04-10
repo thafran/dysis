@@ -60,7 +60,7 @@ export class DysisReddit implements DysisAbstract {
       const anchorTags = node.getElementsByTagName('a');
       for (const element of anchorTags) {
         if (
-          element.href.includes('/user/') 
+          element.href.includes('/user/')
           && element.innerHTML.includes(DysisReddit.getUsernameParamFromPath(element.href))
         ) {
           // Necessary conditions to avoid adding the same object twice to an observer

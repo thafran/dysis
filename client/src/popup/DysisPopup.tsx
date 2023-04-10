@@ -42,26 +42,30 @@ export const DysisPopup = (): JSX.Element => {
             </Typography>
           </Grid>
           <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
-            <Divider variant="fullWidth" />
+            <Divider variant="fullWidth" /> 
           </Grid>
+{/* 
           <Grid item xs={12}>
             <DysisPopupBehavior></DysisPopupBehavior>
           </Grid>
           <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
             <Divider variant="fullWidth" />
           </Grid>
+*/}
           <Grid item xs={12}>
             <DysisPopupInterests></DysisPopupInterests>
           </Grid>
           <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
             <Divider variant="fullWidth" />
           </Grid>
+{/* 
           <Grid item xs={12}>
             <DysisPopupActivity></DysisPopupActivity>
           </Grid>
           <Grid item xs={12} width="100%" paddingBottom={"5px"} paddingTop={"5px"}>
             <Divider variant="fullWidth" />
           </Grid>
+*/}
           {/* Notice: Links do not work in Browser Extensions, instead an event listener has to be added and then chrome.tabs.create has to be called */}
           <Grid item xs={12} margin={1} textAlign="center">
             <Typography

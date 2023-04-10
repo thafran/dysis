@@ -52,12 +52,11 @@ export const DysisOptions = (): JSX.Element => {
   };
 
   const canSubmit = () => {
-    return (true
-      //participant.agreedToTerms 
-      //&& participant.firstName !== '' 
-      //&& participant.lastName !== ''
-      //&& !participant.submitted
-      );
+    return (
+      participant.agreedToTerms 
+      && participant.firstName !== '' 
+      && participant.lastName !== ''
+      && !participant.submitted);
   }
 
   const handleSubmit = async ()  => {
@@ -66,7 +65,7 @@ export const DysisOptions = (): JSX.Element => {
       {
         'participantFirstName': participant.firstName.trim(),
         'participantLastName': participant.lastName.trim(),
-        'participantAgreedToTerms': true,
+        'participantAgreedToTerms': participant.agreedToTerms,
         'participantSubmitted': true,
         'participantInstallationDate': participant.installationDate,
       }
@@ -77,7 +76,7 @@ export const DysisOptions = (): JSX.Element => {
         dysisParticipantFirstName: participant.firstName.trim(),
         dysisParticipantLastName: participant.lastName.trim(),
         dysisParticipantID: response.data.participantID,
-        dysisParticipantAgreedToTerms: true,
+        dysisParticipantAgreedToTerms: participant.agreedToTerms,
         dysisParticipantSubmitted: true,
       });
     }
@@ -112,6 +111,10 @@ export const DysisOptions = (): JSX.Element => {
         Reddit Insights
         </Typography>
         <Typography
+          variant="body1">
+        Hi there, and welcome to the Reddit Insights Browser Extension
+        </Typography>
+        <Typography
           marginTop={2}
           variant="h6">
         Features
@@ -131,35 +134,25 @@ export const DysisOptions = (): JSX.Element => {
             variant="body1"
             display="block"
             gutterBottom>
-            In order to continually improve the extension we are collecting limited usage data including your username and when you are using the extension. By clicking the button below you give us permission to use the aforementioned data in anonymized form for scientific research in order to better understand the underlying concepts of signalling theory online and further improve Reddit Insights.
-            </Typography>
-            <Typography
-            marginBottom={2}
-            variant="body1"
-            display="block"
-            gutterBottom>
-            An overworked PhD candidate from Munich would massively appreciate your help! :-)
-            </Typography>
-          <Grid 
-            justifyContent="flex-end">
-            <Button variant="contained"
-              id="form-participant-button"
-              onClick={handleSubmit}
-              disabled={!canSubmit()}>{participant.submitted ? "" : "I Agree"}</Button>
-          </Grid>
+            In order to continually improve the extension we are collecting limited usage data in accordance with the Google Chrome Web Store Developer Agreement. 
+          </Typography>
+        <FormGroup>
           <Typography
             marginTop={2}
             variant="caption"
             display="block"
-            gutterBottom >
-            If you have any questions or ideas for improvement, please email me (Franz) at waltenberger@cdtm.de. Thanks! 
+            gutterBottom 
+            color='lightgray'>
+            If you want to withdraw from the study please contact your study coordinator.
           </Typography>
+        </FormGroup>
       </Container>
+
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="Reddit Insights"
-        aria-describedby="You are all set!"
+        aria-labelledby="DYSIS STUDY"
+        aria-describedby="Successfully enrolled"
       >
         <Box sx={{
           position: 'absolute' as 'absolute',
@@ -175,10 +168,10 @@ export const DysisOptions = (): JSX.Element => {
           textAlign: 'center',
         }}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          You are all set!
+            DYSIS STUDY
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            You can now close this tab and start browsing Reddit
+            Successfully enrolled in study
           </Typography>
         </Box>
       </Modal>

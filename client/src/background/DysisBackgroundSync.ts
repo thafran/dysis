@@ -42,6 +42,7 @@ export default class DysisBackgroundSync {
             this.syncUsageTime(usageTime);
 
             if (usageTime > this.globalUsageTime) {
+              console.log(usageTime + '/' + this.globalUsageTime);
               this.globalUsageTime = usageTime;
               chrome.storage.local.get(
                 ['reddit_user_name'], (res) => {

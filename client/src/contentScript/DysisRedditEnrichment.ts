@@ -4,7 +4,7 @@ import { dysisConfig } from '../DysisConfig';
 
 /**
  * DysisRedditEnrichment instances are created for each relevant (i.e. visible) user object 
- * (i.e. anchor tag element containing a user path) and manage the actual displying of the
+ * (i.e. anchor tag element containing a user path) and manage the actual displaying of the
  * Dysis information for a given identifier (i.e. username from the anchor element path).
  * Thereby this class represents the actual Enrichment for reddit.
  */
@@ -108,79 +108,79 @@ export class DysisRedditEnrichment {
       tagContainer.innerHTML = '';
 
             // Create behavioral tags
-            if (response?.analytics?.perspective?.toxicity) {
-              if (response.analytics.perspective.toxicity>0.85) {
-                tagContainer.appendChild(
-                  this.createBehaviorElement(
-                    'toxicity',
-                    'toxicity',
-                    response.analytics.perspective.toxicity
-                  )
-                )
-              }
-            }
-      
-            if (response?.analytics?.perspective?.severeToxicity) {
-              if (response.analytics.perspective.severeToxicity>0.85) {
-                tagContainer.appendChild(
-                  this.createBehaviorElement(
-                   'severe toxicity',
-                    'severeToxicity',
-                   response.analytics.perspective.severeToxicity
-                  )
-                )
-              }
-            }
-      
-            if (response?.analytics?.perspective?.insult) {
-              if (response.analytics.perspective.insult>0.85) {
-                tagContainer.appendChild(
-                  this.createBehaviorElement(
-                   'insult',
-                    'insult',
-                   response.analytics.perspective.insult
-                  )
-                )
-              }
-            }
-      
-            if (response?.analytics?.perspective?.identityAttack) {
-              if (response.analytics.perspective.identityAttack>0.85) {
-                tagContainer.appendChild( 
-                  this.createBehaviorElement(
-                    'identity attack',
-                    'identityAttack',
-                    response.analytics.perspective.identityAttack
-                  )
-                )
-              }
-            }
-      
-            if (response?.analytics?.perspective?.threat) {
-              if (response.analytics.perspective.threat>0.85) {
-                tagContainer.appendChild( 
-                  this.createBehaviorElement(
-                    'threat',
-                    'threat',
-                    response.analytics.perspective.threat
-                  )
-                )
-              }
-            }
-            
-            if (response?.analytics?.perspective?.profanity) {
-              if (response.analytics.perspective.profanity>0.85) {
-                tagContainer.appendChild( 
-                  this.createBehaviorElement(
-                    'profanity',
-                    'profanity',
-                    response.analytics.perspective.threat
-                  )
-                )
-              }
-            }
-      
-
+//            if (response?.analytics?.perspective?.toxicity) {
+//              if (response.analytics.perspective.toxicity>0.85) {
+//                tagContainer.appendChild(
+//                  this.createBehaviorElement(
+//                    'toxicity',
+//                    'toxicity',
+//                    response.analytics.perspective.toxicity
+//                  )
+//                )
+//              }
+//            }
+//      
+//            if (response?.analytics?.perspective?.severeToxicity) {
+//              if (response.analytics.perspective.severeToxicity>0.85) {
+//                tagContainer.appendChild(
+//                  this.createBehaviorElement(
+//                   'severe toxicity',
+//                    'severeToxicity',
+//                   response.analytics.perspective.severeToxicity
+//                  )
+//                )
+//              }
+//            }
+//      
+//            if (response?.analytics?.perspective?.insult) {
+//              if (response.analytics.perspective.insult>0.85) {
+//                tagContainer.appendChild(
+//                  this.createBehaviorElement(
+//                   'insult',
+//                    'insult',
+//                   response.analytics.perspective.insult
+//                  )
+//                )
+//              }
+//           }
+//      
+//           if (response?.analytics?.perspective?.identityAttack) {
+//              if (response.analytics.perspective.identityAttack>0.85) {
+//                tagContainer.appendChild( 
+//                  this.createBehaviorElement(
+//                    'identity attack',
+//                    'identityAttack',
+//                   response.analytics.perspective.identityAttack
+//                  )
+//                )
+//              }
+//            }
+//      
+//            if (response?.analytics?.perspective?.threat) {
+//              if (response.analytics.perspective.threat>0.85) {
+//                tagContainer.appendChild( 
+//                  this.createBehaviorElement(
+//                    'threat',
+//                    'threat',
+//                    response.analytics.perspective.threat
+//                  )
+//                )
+//              }
+//            }
+//            
+//            if (response?.analytics?.perspective?.profanity) {
+//              if (response.analytics.perspective.profanity>0.85) {
+//                tagContainer.appendChild( 
+//                  this.createBehaviorElement(
+//                    'profanity',
+//                    'profanity',
+//                    response.analytics.perspective.threat
+//                  )
+//                )
+//              }
+//            }
+//      
+//
       // Create interests tags (max. 10)
       for (const interests of response.context.subreddits.slice(0, this.MAX_NUMBER_OF_SUBREDDITS)) {
         tagContainer.insertAdjacentHTML(
@@ -210,7 +210,7 @@ export class DysisRedditEnrichment {
       //   tagContainer.insertAdjacentHTML(
       //     'beforeend',
       //     this.createMetricsElement(
-      //       '# of comments',
+      //      '#',
       //       response.metrics.totalComments 
       //       >= (dysisConfig.reddit.activity.maxFetchedPosts - 1) 
       //         ? `>${dysisConfig.reddit.activity.maxFetchedPosts}` 

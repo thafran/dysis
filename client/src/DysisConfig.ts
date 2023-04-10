@@ -6,18 +6,18 @@ export const dysisConfig = {
   },
   tracking: {
     defaultMaxIdleTimeInSeconds: 40,
-    defaultTrackingIntervalInSeconds: 1, 
+    defaultTrackingIntervalInSeconds: 1,
   },
   sync: {
     defaultSyncIntervalInMinutes: DEBUG ? 1 / 6 : 2,
   },
   requests: {
-    lowerBoundForFailedRequestTimeoutInSeconds: 5, 
+    lowerBoundForFailedRequestTimeoutInSeconds: 5,
     upperBoundForFailedRequestTimeoutInSeconds: 10,
     maxNumberOfRequestAttempts: 3,
   },
   reddit: {
-    timeoutUntilAnElementIsInViewportInMilliseconds: 80,
+    timeoutUntilAnElementIsInViewportInMilliseconds: 30,
     behavior: {
       lowerLimitForUncertainInPercent: 60,
       lowerLimitForLikelyInPercent: 80,
@@ -26,7 +26,7 @@ export const dysisConfig = {
       maxNumberOfDisplayedInterests: 5,
     },
     activity: {
-      maxFetchedPosts: 150,
+      maxFetchedPosts: 300,
     }
   },
 }

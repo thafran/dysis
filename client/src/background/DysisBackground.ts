@@ -44,25 +44,25 @@ export default class DysisBackground {
               !res.dysisParticipantAgreedToTerms &&
               !res.dysisParticipantSubmitted
             ) {
-              const response = await DysisRequest.post("tracking/create", {
-                participantFirstName: "USER",
-                participantLastName: "USER",
-                participantAgreedToTerms: true,
-                participantSubmitted: true,
-                participantInstallationDate: new Date().toISOString(),
-              });
+//              const response = await DysisRequest.post("tracking/create", {
+//                participantFirstName: "USER",
+//                participantLastName: "USER",
+//                participantAgreedToTerms: true,
+//                participantSubmitted: true,
+//                participantInstallationDate: new Date().toISOString(),
+//              });
               chrome.storage.local.set({
                 dysisParticipantFirstName: "USER",
                 dysisParticipantLastName: "USER",
-                dysisParticipantID: response.data.participantID,
-                dysisParticipantAgreedToTerms: true,
-                dysisParticipantSubmitted: true,
-                DysisInstallationDate: new Date().toISOString(),
+//                dysisParticipantID: response.data.participantID,
+//                dysisParticipantAgreedToTerms: true,
+//                dysisParticipantSubmitted: true,
+//                DysisInstallationDate: new Date().toISOString(),
               });
-              /* chrome.tabs.create(
+               chrome.tabs.create(
               { url: `chrome-extension://${chrome.runtime.id}/options.html` },
               () => {}
-            ); */
+            ); 
             }
           } catch (error) {
             console.error("Error in usercreation check");
